@@ -1,0 +1,46 @@
+---
+title: "assessment1.1"
+author: "Divya Kasturi s4651477"
+date: "15/05/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#R mark down editing
+
+#*Interactive documents are a new way to build Shiny apps*. **An interactive document is an R Markdown file that contains Shiny widgets and outputs. You write the report in markdown**, *and then launch it as an app with the click of a button.*
+
+#intext link for the rmark down
+[https://rmarkdown.rstudio.com/lesson-8.html] 
+
+```{r}
+#reading and loading tidy verse from the library 
+library(tidyverse)
+
+#creating a new variable fastfood and importing the dataset
+fastfood<-read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-09-04/fastfood_calories.csv")
+
+```
+```{r}
+# in a new r chunk creating a new variable & assigning to the older variable and displaying the first 10 datasets 
+fast_food<-fastfood%>%head(10)
+```
+
+```{r}
+#in a new r chunk filtering for calories which are above 1000
+fast_food%>%filter(calories>1000)
+```
+```{r}
+#in a new r chunk creating a new variable"don't_eat_this and filtering total_fat greater than 40 and total_carbs  greater than 80
+dont_eat_this<-fast_food%>%filter(total_fat>40 & total_carb>80)
+```
+
+```{r}
+#using subset function to display the observation of the restuarant Mcdonalds
+subset(fastfood,restaurant=="Mcdonalds")
+
+```
+
+
