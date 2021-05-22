@@ -1,0 +1,86 @@
+---
+title: "Assessment 1.2"
+author: '"Divya Kasturi s4654177'
+date: "22/05/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Data Wrangling 
+#created an r chunk to install package skimr and read the packages tidyverse and skimr
+```{r}
+#install.packages('skimr')
+library(tidyverse)
+library(skimr)
+
+```
+
+#a variable fastfood is used (as created in assessment1.1) to read the dataset fastfood.
+```{r}
+fastfood<-read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-09-04/fastfood_calories.csv")
+
+```
+#used skim function to display the types of variables in the dataset. 
+```{r}
+fastfood%>%skim()
+
+```
+#displayed the number of observations for each restaurant
+```{r}
+fastfood%>%count(restaurant)
+
+```
+#Calculated  and displayed the average number of calories for each restaurant.
+
+```{r}
+fastfood%>%
+  group_by(restaurant)%>%
+  summarise(average_calories=mean(calories))%>%
+  ungroup()
+```
+
+#Created a variable to the dataset, which calculates the average calories per type of restaurant and call it `average_calories` 
+
+```{r}
+fastfood%>%
+  group_by(restaurant)%>%
+  mutate(average_calories=mean(calories))%>%
+  ungroup()
+```
+#Displayed the data vis of total fat per each type of restaurant. In this chunk of data viz geom_point is being used to display the observations and created scatter plots and It can be used to compare two categorical variables or one continuous and one categorical variable.
+```{r}
+fastfood%>%
+  ggplot(aes(restaurant,total_fat))+
+  geom_line()
+  
+```
+# Displayed the count of observations per each type of restaurant.
+```{r}
+
+fastfood%>%count(restaurant)
+
+```
+#Added a variable to the dataset and  calculated  the maximum total fat per type of restaurant and call it `max_total_fat`
+
+```{r}
+
+fastfood%>%
+  group_by(restaurant)%>%
+  mutate(max_total_fat=max(total_fat))%>%
+  ungroup()
+  
+  
+```
+
+#Used observations for Mcdonalds to plot sugar variable against protein with `geom_point()`
+```{r}
+fastfood%>%
+  filter(restaurant=="Mcdonalds")%>%
+  ggplot(aes(sugar,protein))+
+  geom_point()
+
+```
+
+
